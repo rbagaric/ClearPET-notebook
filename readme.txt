@@ -1,7 +1,7 @@
 
-The folder contains the description of a simple (fake) PET system.
+The folder contains the description of a ClearPET camera for the GATE simulation.
 
-The camera is composed of a 46x4 crystal block as a ring. Each crystal block contains 12x12 crystal (4.5mm). The phantom is a water cylinder. The source is in the cylinder, not centered (offset 5 and 7 cm).
+The camera is composed of a 20x4 crystal block as a ring. Each crystal block contain 8x8 crystal (2.0 mm). The phantom is a water cylinder. The source is in the cylinder, not centered (offset 5 and 7 cm).
 
 To run the simulation, just type:
 
