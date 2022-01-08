@@ -1,0 +1,119 @@
+
+
+
+#-------------------oooooOOOOO00000OOOOOooooo---------------------#
+#                                                                 #
+#     D E F I N I T I O N   A N D   D E S C R I T I O N           #
+#        O F   Y O U R   P E T   D E V I C E                      #
+#                                                                 #
+#-------------------oooooOOOOO00000OOOOOooooo---------------------#
+
+#   CYLINDRICAL
+/gate/world/daughters/name                    cylindricalPET
+/gate/world/daughters/insert                  cylinder
+/gate/cylindricalPET/placement/setTranslation 0.0 0.0 0.0 cm
+/gate/cylindricalPET/geometry/setRmax         88.8 mm
+/gate/cylindricalPET/geometry/setRmin         67.8 mm
+/gate/cylindricalPET/geometry/setHeight       111.1 mm
+/gate/cylindricalPET/setMaterial              Air
+/gate/cylindricalPET/vis/forceWireframe
+/gate/cylindricalPET/vis/setColor    			white
+
+#   rsector
+/gate/cylindricalPET/daughters/name           rsector
+/gate/cylindricalPET/daughters/insert         box
+/gate/rsector/placement/setTranslation          77.8 0.0 -5.0 mm
+/gate/rsector/geometry/setXLength                20.0 mm
+/gate/rsector/geometry/setYLength                19.1 mm
+/gate/rsector/geometry/setZLength                101.9 mm
+/gate/rsector/setMaterial                        Air
+/gate/rsector/vis/forceWireframe
+/gate/rsector/vis/setColor                      blue
+
+
+#   module
+/gate/rsector/daughters/name                     module
+/gate/rsector/daughters/insert                   box
+/gate/module/placement/setTranslation          0.0 0.0 0.0 cm
+/gate/module/geometry/setXLength               20 mm
+/gate/module/geometry/setYLength               19.1 mm
+/gate/module/geometry/setZLength               19.1 mm
+/gate/module/setMaterial                       Air
+/gate/module/vis/forceWireframe
+/gate/module/vis/setColor				       white
+
+
+# S U B M O D U L E
+
+
+#   C R Y S T A L
+/gate/module/daughters/name                    crystal
+/gate/module/daughters/insert                  box
+/gate/crystal/placement/setTranslation        0.0 0.0 0.0 mm
+/gate/crystal/geometry/setXLength             20 mm
+/gate/crystal/geometry/setYLength             2.0 mm
+/gate/crystal/geometry/setZLength             2.0 mm
+/gate/crystal/setMaterial                     Air
+/gate/crystal/vis/setColor                    green
+
+
+#   LYSO layer
+/gate/crystal/daughters/name                  LYSO
+/gate/crystal/daughters/insert                box
+/gate/LYSO/placement/setTranslation            -5.0 0.0 0.0 mm
+/gate/LYSO/geometry/setXLength                 10 mm
+/gate/LYSO/geometry/setYLength                 2.0 mm
+/gate/LYSO/geometry/setZLength                 2.0 mm
+/gate/LYSO/setMaterial                         LYSO
+/gate/LYSO/vis/setColor                        yellow
+
+#   LuYAP layer
+/gate/crystal/daughters/name                  LuYAP-80
+/gate/crystal/daughters/insert                box
+/gate/LuYAP-80/placement/setTranslation       5.0 0.0 0.0 mm
+/gate/LuYAP-80/geometry/setXLength            10 mm
+/gate/LuYAP-80/geometry/setYLength            2.0 mm
+/gate/LuYAP-80/geometry/setZLength            2.0 mm
+/gate/LuYAP-80/setMaterial                    LuYAP-80
+/gate/LuYAP-80/vis/setColor                   red
+
+#   R E P E A T    C R Y S T A L
+/gate/crystal/repeaters/insert                cubicArray
+/gate/crystal/cubicArray/setRepeatNumberX     1
+/gate/crystal/cubicArray/setRepeatNumberY     8
+/gate/crystal/cubicArray/setRepeatNumberZ     8
+/gate/crystal/cubicArray/setRepeatVector      10.0 2.3 2.3 mm
+
+
+#   R E P E A T    module
+/gate/module/repeaters/insert                  cubicArray
+/gate/module/cubicArray/setRepeatNumberX      1
+/gate/module/cubicArray/setRepeatNumberY      1 
+/gate/module/cubicArray/setRepeatNumberZ      4
+/gate/module/cubicArray/setRepeatVector       0.0 0.0 27.6 mm
+
+
+#   R E P E A T rsector
+/gate/rsector/repeaters/insert                  ring
+/gate/rsector/ring/setRepeatNumber              20
+/gate/rsector/ring/setModuloNumber				2
+/gate/rsector/ring/setZShift2					9.2 mm
+
+
+#   A T T A C H    S Y S T E M 
+/gate/systems/cylindricalPET/rsector/attach   rsector
+/gate/systems/cylindricalPET/module/attach    module
+/gate/systems/cylindricalPET/crystal/attach   crystal
+/gate/systems/cylindricalPET/layer0/attach    LYSO
+/gate/systems/cylindricalPET/layer1/attach    LuYAP-80
+
+#   A T T A C H    C R Y S T A L  SD 
+
+/gate/LYSO/attachCrystalSD
+/gate/LuYAP-80/attachCrystalSD
+
+/gate/systems/cylindricalPET/describe
+
+
+
+
